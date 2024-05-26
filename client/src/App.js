@@ -56,24 +56,67 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Task Manager</h1>
-                <div>
-                    <h2>Create Task</h2>
+            <h1>Task Manager</h1>
+            <div className="task-form">
+                <h2>Create Task</h2>
+                <input
+                    type="text"
+                    placeholder="Title"
+                    value={newTask.title}
+                    onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                />
+                <input
+                    type="text"
+                    placeholder="Description"
+                    value={newTask.description}
+                    onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                />
+                <select
+                    value={newTask.status}
+                    onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}
+                >
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <input
+                    type="date"
+                    value={newTask.due_date}
+                    onChange={(e) => setNewTask({ ...newTask, due_date: e.target.value })}
+                />
+                <button onClick={createTask}>Create</button>
+            </div>
+            <div className="task-list">
+                <h2>Tasks</h2>
+                {tasks.map(task => (
+                    <div key={task.id} className="task">
+                        <h3>{task.title}</h3>
+                        <p>{task.description}</p>
+                        <p>Status: {task.status}</p>
+                        <p>Due Date: {task.due_date}</p>
+                        <button onClick={() => startEditing(task)}>Edit</button>
+                        <button onClick={() => deleteTask(task.id)}>Delete</button>
+                    </div>
+                ))}
+            </div>
+            {editingTask && (
+                <div className="task-form">
+                    <h2>Edit Task</h2>
                     <input
                         type="text"
                         placeholder="Title"
-                        value={newTask.title}
-                        onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                        value={editingTask.title}
+                        onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
                     />
                     <input
                         type="text"
                         placeholder="Description"
-                        value={newTask.description}
-                        onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                        value={editingTask.description}
+                        onChange={(e) => setEditingTask({ ...editingTask, description: e.target.value })}
                     />
                     <select
-                        value={newTask.status}
-                        onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}
+                        value={editingTask.status}
+                        onChange={(e) => setEditingTask({ ...editingTask, status: e.target.value })}
                     >
                         <option value="pending">Pending</option>
                         <option value="in-progress">In Progress</option>
@@ -81,58 +124,15 @@ function App() {
                     </select>
                     <input
                         type="date"
-                        value={newTask.due_date}
-                        onChange={(e) => setNewTask({ ...newTask, due_date: e.target.value })}
+                        value={editingTask.due_date}
+                        onChange={(e) => setEditingTask({ ...editingTask, due_date: e.target.value })}
                     />
-                    <button onClick={createTask}>Create</button>
+                    <button onClick={() => updateTask(editingTask.id, editingTask)}>Update</button>
+                    <button onClick={() => setEditingTask(null)}>Cancel</button>
                 </div>
-                <div>
-                    <h2>Tasks</h2>
-                    {tasks.map(task => (
-                        <div key={task.id} className="task">
-                            <h3>{task.title}</h3>
-                            <p>{task.description}</p>
-                            <p>Status: {task.status}</p>
-                            <p>Due Date: {task.due_date}</p>
-                            <button onClick={() => startEditing(task)}>Edit</button>
-                            <button onClick={() => deleteTask(task.id)}>Delete</button>
-                        </div>
-                    ))}
-                </div>
-                {editingTask && (
-                    <div>
-                        <h2>Edit Task</h2>
-                        <input
-                            type="text"
-                            placeholder="Title"
-                            value={editingTask.title}
-                            onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Description"
-                            value={editingTask.description}
-                            onChange={(e) => setEditingTask({ ...editingTask, description: e.target.value })}
-                        />
-                        <select
-                            value={editingTask.status}
-                            onChange={(e) => setEditingTask({ ...editingTask, status: e.target.value })}
-                        >
-                            <option value="pending">Pending</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                        </select>
-                        <input
-                            type="date"
-                            value={editingTask.due_date}
-                            onChange={(e) => setEditingTask({ ...editingTask, due_date: e.target.value })}
-                        />
-                        <button onClick={() => updateTask(editingTask.id, editingTask)}>Update</button>
-                        <button onClick={() => setEditingTask(null)}>Cancel</button>
-                    </div>
-                )}
+            )}
             </header>
-        </div>
+    </div>
     );
 }
 

@@ -3,29 +3,29 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# In-memory data storage
+#data storage
 tasks = {}
 current_id = 1
 
-# Helper function to get task by ID
+#get task by ID
 def get_task_or_404(task_id):
     task = tasks.get(task_id)
     if task is None:
         abort(404, description="Task not found")
     return task
 
-# GET /tasks: Retrieve all tasks
+# GET /tasks
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     return jsonify(list(tasks.values()))
 
-# GET /tasks/<int:task_id>: Retrieve a single task by ID
+# GET /tasks/<int:task_id> 
 @app.route('/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
     task = get_task_or_404(task_id)
     return jsonify(task)
 
-# POST /tasks: Create a new task
+# POST /tasks
 @app.route('/tasks', methods=['POST'])
 def create_task():
     global current_id
@@ -45,7 +45,7 @@ def create_task():
     tasks[task_id] = task
     return jsonify(task), 201
 
-# PUT /tasks/<int:task_id>: Update an existing task by ID
+# PUT /tasks/<int:task_id>
 @app.route('/tasks/<int:task_id>', methods=['PUT'])
 def update_task(task_id):
     task = get_task_or_404(task_id)
@@ -59,7 +59,7 @@ def update_task(task_id):
     task['due_date'] = data.get('due_date', task['due_date'])
     return jsonify(task)
 
-
+# DELETE /tasks/<int:task_id>
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
     task = get_task_or_404(task_id)
