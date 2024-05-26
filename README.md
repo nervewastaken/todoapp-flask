@@ -8,6 +8,11 @@
 ### 5) go to todoapp/src -> run command python main.py
 ### 6) go to todoapp/client -> run command npm start
 
+```bash
+$ git clone https://github.com/yourusername/yourproject.git
+$ cd yourproject
+$ npm install
+```
 # Flask
 
 A Flask starter template as per the docs: https://flask.palletsprojects.com/en/3.0.x/quickstart/#a-minimal-application
