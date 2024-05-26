@@ -1,6 +1,9 @@
 # TodoApp
 
 A simple task management application.
+made using
+1) Python Flask backend
+2) React JS frontend
 
 ## Steps to Start
 
