@@ -12,7 +12,7 @@ made using
 Clone the repository to your local machine using the following command:
 
 ```bash
- git clone https://github.com/yourusername/todoapp.git
+ git clone https://github.com/nervewastaken/todoapp.git
  cd todoapp
 ```
 
