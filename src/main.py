@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify, abort
-from datetime import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # This will enable CORS for all routes
 
-#data storage
+# Data storage
 tasks = {}
 current_id = 1
 
-#get task by ID
+# Get task by ID
 def get_task_or_404(task_id):
     task = tasks.get(task_id)
     if task is None:
@@ -19,7 +20,7 @@ def get_task_or_404(task_id):
 def get_tasks():
     return jsonify(list(tasks.values()))
 
-# GET /tasks/<int:task_id> 
+# GET /tasks/<int:task_id>
 @app.route('/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
     task = get_task_or_404(task_id)
@@ -67,4 +68,4 @@ def delete_task(task_id):
     return '', 204
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

@@ -1,2 +1,7 @@
 .venv
 .idx
+/Scripts
+pyenv.cfg
+Lib
+.idx
+Include
