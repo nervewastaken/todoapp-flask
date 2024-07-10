@@ -1,7 +1,8 @@
 .venv
 .idx
 /Scripts
-pyenv.cfg
+pyvenv.cfg
 Lib
 .idx
 Include
+
