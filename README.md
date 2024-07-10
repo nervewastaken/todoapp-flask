@@ -12,8 +12,8 @@ made using
 Clone the repository to your local machine using the following command:
 
 ```bash
- git clone https://github.com/nervewastaken/todoapp.git
- cd todoapp
+ git clone https://github.com/nervewastaken/todoapp-flask.git
+ cd todoapp-flask
 ```
 
 ### 2) Create and Activate a Virtual Environment
