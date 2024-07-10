@@ -13,6 +13,7 @@ Clone the repository to your local machine using the following command:
 
 ```bash
  git clone https://github.com/yourusername/todoapp.git
+ cd todoapp
 ```
 
 ### 2) Create and Activate a Virtual Environment
